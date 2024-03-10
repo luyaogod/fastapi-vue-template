@@ -1,7 +1,7 @@
 import uvicorn
 from fastapi import FastAPI,HTTPException
 from fastapi.exceptions import RequestValidationError
-from .settings import TORTOISE_ORM,ALLOWHOSTS
+from settings import TORTOISE_ORM,ALLOWHOSTS
 from tortoise.contrib.fastapi import register_tortoise
 from API import permissions,role,user,relation,login,scope_auth_test
 from tortoise.exceptions import OperationalError, DoesNotExist, IntegrityError, ValidationError
