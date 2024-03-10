@@ -26,7 +26,7 @@ services:
     container_name: backend
     build: .    
     # command: bash -c "python3 backend/db_init.py && python3 backend/main.py"
-    command: bash -c "./wait-for-it.sh db:3306 --timeout=30 --strict -- python3 backend/db_init.py && python3 backend/main.py"
+    command: bash -c "wait-for-it.sh db:3306 --timeout=30 --strict -- python3 backend/db_init.py && python3 backend/main.py"
     # command: bash -c "python3 backend/db_init.py && uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload"
     # command: bash -c "uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
     volumes:
