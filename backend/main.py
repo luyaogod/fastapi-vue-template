@@ -1,7 +1,7 @@
 import uvicorn
 from fastapi import FastAPI,HTTPException
 from fastapi.exceptions import RequestValidationError
-from settings import TORTOISE_ORM,ALLOWHOSTS
+from .settings import TORTOISE_ORM,ALLOWHOSTS
 from tortoise.contrib.fastapi import register_tortoise
 from API import permissions,role,user,relation,login,scope_auth_test
 from tortoise.exceptions import OperationalError, DoesNotExist, IntegrityError, ValidationError
@@ -46,7 +46,8 @@ app.add_middleware(
 )
 
 if __name__ == "__main__":
-    uvicorn.run('main:app', host='127.0.0.1', port=8000, reload=True, workers=1)
+    # uvicorn.run('main:app', host='127.0.0.1', port=8000, reload=True, workers=1)
+    uvicorn.run('main:app', host='0.0.0.0', port=8000, reload=True, workers=1)
 
 
 
