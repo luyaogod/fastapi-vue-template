@@ -1,6 +1,7 @@
 from tortoise import Tortoise, run_async
 from settings import TORTOISE_ORM
 from models import  models
+from tortoise.exceptions import OperationalError
 
 async def insert_permission():
     permissions = [
@@ -42,23 +43,25 @@ async def insert_user():
             pass
 
 
-
 async def main():
-
     await Tortoise.init(
         config=TORTOISE_ORM
     )
 
-    #创建表
-    await Tortoise.generate_schemas()
+    try:
+        user =  await models.User.get_or_none(pk = 1)
+        print('- 已初始化')
+    except OperationalError as e:
+        print('- 未初始化')
+        await Tortoise.generate_schemas()
 
-    await insert_permission()
-    await insert_role()
-    await insert_user()
-
-    await Tortoise.close_connections()
-
-
+        await insert_permission()
+        await insert_role()
+        await insert_user()
+    
+        await Tortoise.close_connections()
+        print('- 初始化完成')
+        
 if __name__ == "__main__":
     run_async(main())
 

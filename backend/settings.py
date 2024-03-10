@@ -4,7 +4,7 @@ TORTOISE_ORM = {
             'default': {
                 'engine': 'tortoise.backends.mysql',
                 'credentials': {
-                    'host': '127.0.0.1',
+                    'host': 'db',
                     'port': '3306',
                     'user': 'root',
                     'password': 'maluyao123',
@@ -27,8 +27,11 @@ ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 #跨域
+# ALLOWHOSTS = [
+#     "http://localhost",
+#     "http://localhost:8000",
+#     "http://localhost:5173",
+# ]
 ALLOWHOSTS = [
-    "http://localhost",
-    "http://localhost:8000",
-    "http://localhost:5173",
+    "*"
 ]
