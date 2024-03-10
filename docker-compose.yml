@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DBPASSWORD}
+      - MYSQL_DATABASE=fastapi-vue-template
+      - TZ=Asia/Shanghai
+    ports:
+      - "3306:3306"
+
+
+  admin:
+    image: phpmyadmin:latest
+    restart: always
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+      - MYSQL_ROOT_PASSWORD=${DBPASSWORD}
+    ports:
+      - "8080:80"
+
+  app:
+    container_name: backend
+    build: .    
+    command: bash -c "python3 ./backend/db_init.py && uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      

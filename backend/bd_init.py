@@ -42,7 +42,6 @@ async def insert_user():
             pass
 
 
-
 async def main():
 
     await Tortoise.init(
